@@ -20,9 +20,18 @@ namespace PopcornWebApp.Controllers
         }
 
         // GET: Movies
-        public async Task<IActionResult> Index()
+        public IActionResult Index(int pg = 1)
         {
-            return View(await _context.Movies.ToListAsync());
+            const int pageSize = 5;
+            if (pg < 1)
+                pg = 1;
+
+            int recsCount = _context.Movies.Count();
+            var pager = new Pager(recsCount, pg, pageSize);
+            int recSkip = (pg - 1) * pageSize;
+            List<Movies> movies = _context.Movies.Skip(recSkip).Take(pager.PageSize).ToList();
+            this.ViewBag.Pager = pager;
+            return View(movies);
         }
 
         // GET: Movies/Details/5
