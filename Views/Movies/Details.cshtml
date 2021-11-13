@@ -1,0 +1,39 @@
+﻿@model PopcornWebApp.Models.Movies
+
+@{
+    ViewData["Title"] = "Details";
+}
+
+<h1>Details</h1>
+
+<div>
+    <h4>Movies</h4>
+    <hr />
+    <dl class="row">
+        <div class="col-4">
+            <img src="@Model.MovieImage" class="img-fluid">
+        </div>
+        <div><dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.MovieTitle)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.MovieTitle)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Synopsis)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Synopsis)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Duration)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Duration)
+        </dd></div>
+    </dl>
+</div>
+<div>
+    <a asp-action="Edit" asp-route-id="@Model.Id">Edit</a> |
+    <a asp-action="Index">Back to List</a>
+</div>

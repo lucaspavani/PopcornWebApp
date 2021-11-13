@@ -1,0 +1,79 @@
+﻿@model IEnumerable<PopcornWebApp.Models.Sessions>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Sessions</h1>
+
+<p>
+    <a asp-action="Create" class="btn btn-sm btn-success ml-1">Create Session</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.SessionDate)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.SessionStart)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.SessionEnd)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.TicketPrice)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.AnimationTypes)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.AudioTypes)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Movies)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Rooms)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.SessionDate)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.SessionStart)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.SessionEnd)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.TicketPrice)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.AnimationTypes.Type)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.AudioTypes.Type)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Movies.MovieTitle)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Rooms.RoomName)
+            </td>
+            <td>
+                <div class="btn-group">
+                    <a asp-action="Edit" asp-route-id="@item.Id" class="btn btn-sm btn-info">Edit</a>
+                    <a asp-action="Details" asp-route-id="@item.Id" class="btn btn-sm btn-primary ml-1">Details</a>
+                    <a asp-action="Delete" asp-route-id="@item.Id" class="btn btn-sm btn-danger ml-1">Delete</a>
+                </div>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

@@ -1,0 +1,64 @@
+﻿@model PopcornWebApp.Models.Sessions
+
+@{
+    ViewData["Title"] = "Create";
+}
+
+<h1>Create</h1>
+
+<h4>Sessions</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Create">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="SessionDate" class="control-label"></label>
+                <input asp-for="SessionDate" class="form-control" />
+                <span asp-validation-for="SessionDate" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="SessionStart" class="control-label"></label>
+                <input asp-for="SessionStart" class="form-control" />
+                <span asp-validation-for="SessionStart" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="SessionEnd" class="control-label"></label>
+                <input asp-for="SessionEnd" class="form-control" />
+                <span asp-validation-for="SessionEnd" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="TicketPrice" class="control-label"></label>
+                <input asp-for="TicketPrice" class="form-control" />
+                <span asp-validation-for="TicketPrice" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="AnimationTypesFK" class="control-label"></label>
+                <select asp-for="AnimationTypesFK" class ="form-control" asp-items="ViewBag.AnimationTypesFK"></select>
+            </div>
+            <div class="form-group">
+                <label asp-for="AudioTypesFK" class="control-label"></label>
+                <select asp-for="AudioTypesFK" class ="form-control" asp-items="ViewBag.AudioTypesFK"></select>
+            </div>
+            <div class="form-group">
+                <label asp-for="MoviesFK" class="control-label"></label>
+                <select asp-for="MoviesFK" class ="form-control" asp-items="ViewBag.MoviesFK"></select>
+            </div>
+            <div class="form-group">
+                <label asp-for="RoomsFK" class="control-label"></label>
+                <select asp-for="RoomsFK" class ="form-control" asp-items="ViewBag.RoomsFK"></select>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
