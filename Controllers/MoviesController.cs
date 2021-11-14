@@ -68,6 +68,11 @@ namespace PopcornWebApp.Controllers
             if (ModelState.IsValid)
             {
                 _context.Add(movies);
+                if (MovieTitleCheck(movies.MovieTitle))
+                {
+                    ModelState.AddModelError(string.Empty, "You cannot add movies with the same title!");
+                    return View(movies);
+                }
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
@@ -157,6 +162,11 @@ namespace PopcornWebApp.Controllers
         private bool MoviesExists(int id)
         {
             return _context.Movies.Any(e => e.Id == id);
+        }
+
+        private bool MovieTitleCheck(string title)
+        {
+            return _context.Movies.Any(e => e.MovieTitle == title);
         }
     }
 }
