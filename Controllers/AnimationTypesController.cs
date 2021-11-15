@@ -25,24 +25,6 @@ namespace PopcornWebApp.Controllers
             return View(await _context.AnimationTypes.ToListAsync());
         }
 
-        // GET: AnimationTypes/Details/5
-        public async Task<IActionResult> Details(int? id)
-        {
-            if (id == null)
-            {
-                return NotFound();
-            }
-
-            var animationTypes = await _context.AnimationTypes
-                .FirstOrDefaultAsync(m => m.Id == id);
-            if (animationTypes == null)
-            {
-                return NotFound();
-            }
-
-            return View(animationTypes);
-        }
-
         // GET: AnimationTypes/Create
         public IActionResult Create()
         {
@@ -60,57 +42,6 @@ namespace PopcornWebApp.Controllers
             {
                 _context.Add(animationTypes);
                 await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
-            }
-            return View(animationTypes);
-        }
-
-        // GET: AnimationTypes/Edit/5
-        public async Task<IActionResult> Edit(int? id)
-        {
-            if (id == null)
-            {
-                return NotFound();
-            }
-
-            var animationTypes = await _context.AnimationTypes.FindAsync(id);
-            if (animationTypes == null)
-            {
-                return NotFound();
-            }
-            return View(animationTypes);
-        }
-
-        // POST: AnimationTypes/Edit/5
-        // To protect from overposting attacks, enable the specific properties you want to bind to, for 
-        // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,Type")] AnimationTypes animationTypes)
-        {
-            if (id != animationTypes.Id)
-            {
-                return NotFound();
-            }
-
-            if (ModelState.IsValid)
-            {
-                try
-                {
-                    _context.Update(animationTypes);
-                    await _context.SaveChangesAsync();
-                }
-                catch (DbUpdateConcurrencyException)
-                {
-                    if (!AnimationTypesExists(animationTypes.Id))
-                    {
-                        return NotFound();
-                    }
-                    else
-                    {
-                        throw;
-                    }
-                }
                 return RedirectToAction(nameof(Index));
             }
             return View(animationTypes);
