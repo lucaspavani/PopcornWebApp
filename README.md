@@ -13,11 +13,12 @@ Framework Core no padrão de projeto de software MVC (Model-View-Controller).
 <h3>Como executar o projeto?</h3>
 
 <ul>
-  <li>Baixe e instale o <a href="blob:https://visualstudio.microsoft.com/d0f0e1e0-ea60-4244-a4de-7d8242a27af0">Visual Studio</a></p></li>
+  <li>Baixe e instale o <a href="https://visualstudio.microsoft.com/pt-br/downloads/">Visual Studio</a></p></li>
   <li>Faça o download ou clone este repositório</li>
   <li>Abra o arquivo "PopcornWebApp.sln" no Visual Studio</li>
   <li>No Packet Manager, execute o comando "update-database"</li>
 </ul>  
+
 
 <hr>
 
