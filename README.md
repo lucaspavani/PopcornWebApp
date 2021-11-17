@@ -21,8 +21,3 @@ Framework Core no padrão de projeto de software MVC (Model-View-Controller).
 
 
 <hr>
-
-<h3>Funcionalidades pendentes</h3>
-
-
-
