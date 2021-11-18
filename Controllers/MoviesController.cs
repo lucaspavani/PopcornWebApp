@@ -156,9 +156,17 @@ namespace PopcornWebApp.Controllers
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
             var movies = await _context.Movies.FindAsync(id);
-            _context.Movies.Remove(movies);
-            await _context.SaveChangesAsync();
-            return RedirectToAction(nameof(Index));
+            if (MovieSessionCheck(id) == false)
+            {
+                _context.Movies.Remove(movies);
+                await _context.SaveChangesAsync();
+                return RedirectToAction(nameof(Index));
+            }
+            else
+            {
+                ModelState.AddModelError(string.Empty, "This movie is linked to a session!");
+                return RedirectToAction(nameof(Index));
+            }
         }
 
         private bool MoviesExists(int id)
@@ -169,6 +177,11 @@ namespace PopcornWebApp.Controllers
         private bool MovieTitleCheck(string title)
         {
             return _context.Movies.Any(e => e.MovieTitle == title);
+        }
+
+        public bool MovieSessionCheck(int? movieid)
+        {
+            return _context.Sessions.Any(e => e.MoviesFK == movieid);
         }
     }
 }
