@@ -164,6 +164,7 @@ namespace PopcornWebApp.Controllers
             }
             else
             {
+                //The message from ModelError isn't being triggered
                 ModelState.AddModelError(string.Empty, "This movie is linked to a session!");
                 return RedirectToAction(nameof(Index));
             }

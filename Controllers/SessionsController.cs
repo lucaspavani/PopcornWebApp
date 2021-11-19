@@ -67,7 +67,7 @@ namespace PopcornWebApp.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("Id,SessionDate,SessionStart,SessionEnd,TicketPrice,AnimationTypesFK,AudioTypesFK,MoviesFK,RoomsFK")] Sessions sessions)
         {
-            if (ModelState.IsValid)
+            if (ModelState.IsValid && (sessions.SessionStart < sessions.SessionEnd) && (RoomAvaiabilityCheck(sessions.RoomsFK, sessions.SessionDate, sessions.SessionStart, sessions.SessionEnd) == false))
             {
                 _context.Add(sessions);
                 await _context.SaveChangesAsync();
@@ -175,6 +175,20 @@ namespace PopcornWebApp.Controllers
         private bool SessionsExists(int id)
         {
             return _context.Sessions.Any(e => e.Id == id);
+        }
+
+        private bool RoomAvaiabilityCheck(int roomfk, DateTime sessionsdate, DateTime sessionstart, DateTime sessionend)
+        {
+            if (_context.Sessions.Any(e => e.RoomsFK == roomfk & e.SessionDate == sessionsdate))
+                if (_context.Sessions.Any(e => sessionstart >= e.SessionStart && sessionstart <= e.SessionEnd))
+                    return true;
+                else if ((_context.Sessions.Any(e => sessionend >= e.SessionStart && sessionend <= e.SessionEnd)))
+                    return true;
+                else if (_context.Sessions.Any(e => sessionstart <= e.SessionStart && sessionend >= e.SessionEnd))
+                    return true;
+                else if (_context.Sessions.Any(e => sessionend >= e.SessionStart && sessionend <= e.SessionEnd))
+                    return true;
+            return false;
         }
     }
 }

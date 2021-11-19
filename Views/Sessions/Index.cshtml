@@ -70,7 +70,10 @@
                 <div class="btn-group">
                     <a asp-action="Edit" asp-route-id="@item.Id" class="btn btn-sm btn-info">Edit</a>
                     <a asp-action="Details" asp-route-id="@item.Id" class="btn btn-sm btn-primary ml-1">Details</a>
-                    <a asp-action="Delete" asp-route-id="@item.Id" class="btn btn-sm btn-danger ml-1">Delete</a>
+                    @if (item.SessionDate >= DateTime.Now.AddDays(10) || item.SessionDate < DateTime.Now)
+                    {
+                        <a asp-action="Delete" asp-route-id="@item.Id" class="btn btn-sm btn-danger ml-1">Delete</a>
+                    }
                 </div>
             </td>
         </tr>

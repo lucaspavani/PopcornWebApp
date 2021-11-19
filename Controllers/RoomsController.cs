@@ -142,14 +142,25 @@ namespace PopcornWebApp.Controllers
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
             var rooms = await _context.Rooms.FindAsync(id);
-            _context.Rooms.Remove(rooms);
-            await _context.SaveChangesAsync();
+            if (RoomSessionCheck(id) == false)
+            {
+                _context.Rooms.Remove(rooms);
+                await _context.SaveChangesAsync();
+                return RedirectToAction(nameof(Index));
+            }
+            //The message from ModelError isn't being triggered
+            ModelState.AddModelError(string.Empty, "This room is linked to a session!");
             return RedirectToAction(nameof(Index));
         }
 
         private bool RoomsExists(int id)
         {
             return _context.Rooms.Any(e => e.Id == id);
+        }
+
+        public bool RoomSessionCheck(int? roomid)
+        {
+            return _context.Sessions.Any(e => e.RoomsFK == roomid);
         }
     }
 }
